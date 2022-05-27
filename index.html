@@ -1,212 +1,138 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>给你的一封信</title>	    
-        <link type="text/css" rel="stylesheet" href="./file/default.css">
-		<script type="text/javascript" src="./file/jquery.min.js"></script>
-		<script type="text/javascript" src="./file/jscex.min.js"></script>
-		<script type="text/javascript" src="./file/jscex-parser.js"></script>
-		<script type="text/javascript" src="./file/jscex-jit.js"></script>
-		<script type="text/javascript" src="./file/jscex-builderbase.min.js"></script>
-		<script type="text/javascript" src="./file/jscex-async.min.js"></script>
-		<script type="text/javascript" src="./file/jscex-async-powerpack.min.js"></script>
-		<script type="text/javascript" src="./file/functions.js" charset="utf-8"></script>
-		<script type="text/javascript" src="./file/love.js" charset="utf-8"></script>
-	    <style type="text/css">
-        </style>
-</head>
-    <body>
-        <div id="main">
-            <div id="error">本页面采用HTML5编辑，目前您的浏览器无法显示，请换成谷歌(<a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a>)或者火狐(<a href="http://firefox.com.cn/download/">Firefox</a>)浏览器，或者其他游览器的最新版本。</div>
-            <audio autoplay="autoplay" height="100" width="100">
-                    <source src="renxi.mp3" type="audio/mp3" />
-                    <embed height="100" width="100" src="renxi.mp3" />
-            </audio>
-            <div id="wrap">
-                <div id="text">
-                    <div id="code"> <font color="#FF0000"> <span class="say">亲爱的宝宝，我爱你</span><br>
-                      <span class="say"> 我知道我不会甜言蜜语，</span><br>
-                      <span class="say"> 但是我会用行动证明一切</span><br>
-                      <span class="say">你说我啰嗦，</span><br>             
-                          <span class="say"> 有些东西因为越在乎所以越怕失去</span><br>
-                      <span class="say">因为我太爱你了，所以我害怕失去你</span><br>
-                      <span class="say">因为我太爱你了，所以我对你总啰嗦</span><br>
-                      <span class="say">希望可以执子之手，与子偕老</span><br>
-                      <span class="say">如果上天让我许三个愿望，</span><br>
-                              <span class="say">第一个是今生今世和你在一起， </span><br>
-                           <span class="say"> 第二个是再生再世和你在一起，</span><br>
-                           <span class="say">第三个是永生永世和你不分离 </span><br>
-                      <span class="say"><span class="space"></span> -- 爱你的老公</span> </font>
-                          <br />
-                          <br />
-                      </p>
-                    </div>
-                  </div>
-                <div id="clock-box">
-                    <span class="STYLE1"></span><font color="#33CC00">亲爱的，我喜欢你</font>
-<span class="STYLE1">已经是……</span>
-                  <div id="clock"></div>
-              </div>
-                <canvas id="canvas" width="1100" height="680"></canvas>
-            </div>
-            
-        </div>
-    
-    <script>
-    </script>
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<meta charset="UTF-8">
+		<title>First anniversary of love</title>
+		<link rel="stylesheet" type="text/css" href="./css/format.css">
+		<!-- todo -->
+		<link rel="stylesheet" type="text/css" href="./css/lovexhj.css">
+		<link rel="stylesheet" href="./css/swiper.css">
+		<link rel="stylesheet" type="text/css" href="./css/FiraCode.css">
+	</head>
 
-    <script>
-    (function(){
-        var canvas = $('#canvas');
+	<body style="margin:0px">
+		<audio autoplay loop>
+			<source src="music/music.mp3" type="audio/mpeg">
+			Your browser does not support the audio.
+		</audio>
+		<canvas></canvas>
+		<div id="imgTxt">
+			<span id="Txt"></span> <br />
+			<span id="tmp"></span>
+			<img id="img" src="">
+		</div>
+		<div id="heartTxt">
+			<span id="clickMe">Click!</span>
+			<div id="heart">
+				<button id="button" onclick="play()"></button>
+			</div>
+		</div>
+		<div id="content">
+			<h2 id="together">We have been together</h2>
+			<div id="timer">
+				<b id="d"></b> Days 
+				<b id="h"></b> Hours
+				<b id="m"></b> Minutes
+				<b id="s"></b> Seconds
+			</div>
+		</div>
+
+    	<div id = "typeDiv">
+        	<span id="txt1"></span> <br />
+        	<span id="txt2"></span>
+    	</div>		
+
+		<script >
+			var ok = 0;
+			var flag = 1;
+			var myImage = document.getElementById("img");
+			var myTxt = document.getElementById("Txt");
+			var imageArray = ["photo/pic1.png", "photo/pic2.png", "photo/pic3.png", "photo/pic4.png", "photo/pic5.png", "photo/pic6.png", 
+			"photo/pic7.png", "photo/pic8.png", "photo/pic9.png", "photo/pic10.png", "photo/pic11.png", "photo/pic12.png", "photo/pic13.png",
+			"photo/pic14.png", "photo/pic15.png", "photo/pic16.png"];
+			var imageIndex = 0;
+			var txtArray = ["你好哇，小可爱~", "我们第一次见面的时候，女票认真的小眼神，嘻嘻", "当时我也有在比心哦~(｡･ω･｡)ﾉ♡",
+			 "第一次去重庆见女票, 小仙女出现啦", "江边，今夜月色真美", "牵爪爪散步，开心~o(≧v≦)o", "咳咳，老大不小了还写情书，真是让人害羞(/ω＼)",
+			 "超级喜欢女票送的兔兔和胡萝卜!!!", "举手手，我是最可爱的(･∀･)", "同款举手手（好吧，还是女票可爱）", "哇哇哇，这么可爱犯规啦", 
+			 "下次去旅游可以叫上我一起吗~", "说，我叠的星星好不好看٩(๑òωó๑)۶", "洪崖洞买的邱邱~", "女票女票，我爱你~", "哒哒哒，逃~"];
+			 var len = imageArray.length;
+			var t = 0;
+		</script>
 		
-        if (!canvas[0].getContext) {
-            $("#error").show();
-            return false;        }
+		<script type="text/javascript" src="./js/stars.js"></script>
+		<script type="text/javascript" src="./js/typeWriter.js"></script>
+		<script type="text/javascript" src="./js/date.js"></script>
+		<script type="text/javascript" src="./js/playImg.js"></script>
+	</body>
 
-        var width = canvas.width();
-        var height = canvas.height();        
-        canvas.attr("width", width);
-        canvas.attr("height", height);
-        var opts = {
-            seed: {
-                x: width / 2 - 20,
-                color: "rgb(190, 26, 37)",
-                scale: 2
-            },
-            branch: [
-                [535, 680, 570, 250, 500, 200, 30, 100, [
-                    [540, 500, 455, 417, 340, 400, 13, 100, [
-                        [450, 435, 434, 430, 394, 395, 2, 40]
-                    ]],
-                    [550, 445, 600, 356, 680, 345, 12, 100, [
-                        [578, 400, 648, 409, 661, 426, 3, 80]
-                    ]],
-                    [539, 281, 537, 248, 534, 217, 3, 40],
-                    [546, 397, 413, 247, 328, 244, 9, 80, [
-                        [427, 286, 383, 253, 371, 205, 2, 40],
-                        [498, 345, 435, 315, 395, 330, 4, 60]
-                    ]],
-                    [546, 357, 608, 252, 678, 221, 6, 100, [
-                        [590, 293, 646, 277, 648, 271, 2, 80]
-                    ]]
-                ]] 
-            ],
-            bloom: {
-                num: 700,
-                width: 1080,
-                height: 650,
-            },
-            footer: {
-                width: 1200,
-                height: 5,
-                speed: 10,
-            }
-        }
+	<!-- todo -->
+	<body>
+		<div class="page page1">
+			<div class="swiper-container swiper-container-lovexhj1">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<div class="page1-lovexhj1">
+							<img src="https://q1.qlogo.cn/g?b=qq&nk=304915556&s=640" alt="xhj">
+							<img src="./images/cat.gif" alt="cat">
+							<img src="https://q1.qlogo.cn/g?b=qq&nk=1656071287&s=640" alt="tqy">
+							<p id="lovetime"></p>
+							<p>我也不知道该准备一点什么给你逗你开心</p>
+							<p>还是写一点好玩的送给你吧~</p>
+							<span class="right">往右划动 →</span>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<div class="page1-lovexhj1">
+							<img class="cat" src="./images/cat2.gif" alt="cat2">
+							<p class="catText">你常对我发的表情 ↑</p>
+							<p>上次也是花心思写了一个小玩意给你</p>
+							<p>但我觉得整体设计&&界面都过于<b>LOW</b></p>
+							<p>那就重新送你一个吧</p>
+							<span class="right">再划一下 →</span>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<div class="page1-lovexhj1">
+							<img class="cat" src="./images/cat3.gif" alt="cat3">
+							<p class="catText">抱死你 ↑</p>
+							<p>这次我<b>超级超级超级超级</b></p>
+							<p>认真的写了一遍</p>
+							<p style="font-size: 13px;">以 框架构造、
+								<span style="color: red; font-size: 16px;">爱你</span>、
+								视觉体验、响应式 为核心制作
+							</p>
+							<span class="right">再划一次吧 →</span>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<div class="page1-lovexhj1">
+							<img class="cat" src="./images/cat4.gif" alt="cat4">
+							<p class="catText">拍你猪头 ↑</p>
+							<p>这次应该不会太难看了吧</p>
+							<p>希望你喜欢呀</p>
+							<p>爱你哟(๑′ᴗ‵๑)</p>
+							<b>520快乐我的<span style="color: pink;">猪</span></b>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-pagination swiper-pagination-lovexhj1"></div>
+			</div>
+		</div>
 
-        var tree = new Tree(canvas[0], width, height, opts);
-        var seed = tree.seed;
-        var foot = tree.footer;
-        var hold = 1;
+		<!-- js加载 -->
+		<script src="https://cdn.bootcss.com/wow/1.1.2/wow.js"></script>
+		<script src="./js/typeit.min.js"></script>
+		<script src="./js/swiper-3.4.2.min.js"></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.js"></script>
+	
+		<script src="./js/swiper.js"></script>
+		<script src="./js/su.js"></script>
+		<script>
+			(function () {
+				new WOW().init()
+			})()
+		</script>
 
-        canvas.click(function(e) {
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            if (seed.hover(x, y)) {
-                hold = 0; 
-                canvas.unbind("click");
-                canvas.unbind("mousemove");
-                canvas.removeClass('hand');
-            }
-        }).mousemove(function(e){
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            canvas.toggleClass('hand', seed.hover(x, y));
-        });
-
-        var seedAnimate = eval(Jscex.compile("async", function () {
-            seed.draw();
-            while (hold) {
-                $await(Jscex.Async.sleep(10));
-            }
-            while (seed.canScale()) {
-                seed.scale(0.95);
-                $await(Jscex.Async.sleep(10));
-            }
-            while (seed.canMove()) {
-                seed.move(0, 2);
-                foot.draw();
-                $await(Jscex.Async.sleep(10));
-            }
-        }));
-
-        var growAnimate = eval(Jscex.compile("async", function () {
-            do {
-    	        tree.grow();
-                $await(Jscex.Async.sleep(10));
-            } while (tree.canGrow());
-        }));
-
-        var flowAnimate = eval(Jscex.compile("async", function () {
-            do {
-    	        tree.flower(2);
-                $await(Jscex.Async.sleep(10));
-            } while (tree.canFlower());
-        }));
-
-        var moveAnimate = eval(Jscex.compile("async", function () {
-            tree.snapshot("p1", 240, 0, 610, 680);
-            while (tree.move("p1", 500, 0)) {
-                foot.draw();
-                $await(Jscex.Async.sleep(10));
-            }
-            foot.draw();
-            tree.snapshot("p2", 500, 0, 610, 680);
-
-            // 会有闪烁不得意这样做, (＞﹏＜)
-            canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
-            canvas.css("background", "#ffe");
-            $await(Jscex.Async.sleep(300));
-            canvas.css("background", "none");
-        }));
-
-        var jumpAnimate = eval(Jscex.compile("async", function () {
-            var ctx = tree.ctx;
-            while (true) {
-                tree.ctx.clearRect(0, 0, width, height);
-                tree.jump();
-                foot.draw();
-                $await(Jscex.Async.sleep(25));
-            }
-        }));
-
-        var textAnimate = eval(Jscex.compile("async", function () {
-		    var together = new Date();
-		    together.setFullYear(2010,1 , 15); 			//时间年月日
-		    together.setHours(16);						//小时	
-		    together.setMinutes(53);					//分钟
-		    together.setSeconds(0);					//秒前一位
-		    together.setMilliseconds(2);				//秒第二位
-
-		    $("#code").show().typewriter();
-            $("#clock-box").fadeIn(500);
-            while (true) {
-                timeElapse(together);
-                $await(Jscex.Async.sleep(1000));
-            }
-        }));
-
-        var runAsync = eval(Jscex.compile("async", function () {
-            $await(seedAnimate());
-            $await(growAnimate());
-            $await(flowAnimate());
-            $await(moveAnimate());
-
-            textAnimate().start();
-
-            $await(jumpAnimate());
-        }));
-
-        runAsync().start();
-    })();
-    </script></body></html>
+	</body>
+</html>
